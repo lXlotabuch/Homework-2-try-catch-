@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 1. try/ catch використовується часто, якщо в будь якому випадку треба виконати код -->
+    <!-- 2. В випадку якщо треба зробити власні помилки-->
+
+    <div id="root"></div>
+    <script>
+      const books = [
+        {
+          author: "Скотт Бэккер",
+          name: "Тьма, что приходит прежде",
+          price: 70,
+        },
+        {
+          author: "Скотт Бэккер",
+          name: "Воин-пророк",
+        },
+        {
+          name: "Тысячекратная мысль",
+          price: 70,
+        },
+        {
+          author: "Скотт Бэккер",
+          name: "Нечестивый Консульт",
+          price: 70,
+        },
+        {
+          author: "Дарья Донцова",
+          name: "Детектив на диете",
+          price: 40,
+        },
+        {
+          author: "Дарья Донцова",
+          name: "Дед Снегур и Морозочка",
+        },
+      ];
+
+      const root = document.querySelector("#root");
+      const list = document.createElement("ul");
+
+      for (el of books) {
+        try {
+          if (!("price" in el)) {
+            throw new Error("No price!");
+          }
+          if (!("author" in el)) {
+            throw new Error("No autor!");
+          }
+          if (!("name" in el)) {
+            throw new Error("No name!");
+          }
+          const li = document.createElement("li");
+          const { name, author, price } = el;
+          li.insertAdjacentHTML("beforeend", `<div> Author: ${author}</div>`);
+          li.insertAdjacentHTML("beforeend", `<div> Book name: ${name}</div>`);
+          li.insertAdjacentHTML("beforeend", `<div> Price: ${price}</div>`);
+          list.appendChild(li);
+        } catch (error) {
+          console.error(error.name + ":" + error.message);
+        }
+      }
+
+      root.appendChild(list);
+    </script>
+  </body>
+</html>
